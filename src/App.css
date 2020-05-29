@@ -2,6 +2,41 @@
   text-align: center;
 }
 
+svg {
+  fill: #000;
+  fill-opacity: 0.3;
+}
+
+path {
+  stroke: steelblue;
+}
+.lineChartSvg {
+  background-color: #fff;
+  padding: 10px;
+}
+.axis {
+  stroke: #000;
+}
+
+.line-group {
+  overflow-x: scroll;
+}
+
+.axis-labels text {
+  fill: #000;
+  fill-opacity: 0.9;
+  font-size: 12px;
+  text-anchor: middle;
+}
+
+.axis-labels line {
+  stroke: #000;
+}
+
+.gridline {
+  opacity: 0.2;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
