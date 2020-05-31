@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import dollarReducer from './dollarReducer';
+import dollar from './dollarReducer';
 
 const state = combineReducers({
-  dollarReducer,
+  dollar,
 });
 
 export default state;
