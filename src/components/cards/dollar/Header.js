@@ -3,7 +3,7 @@ import React from 'react';
 export default ({title, subTitle}) => (
   <div
     style={{
-      color: 'white',
+      color: '#eff2f4',
     }}
   >
     <h2>{title}</h2>

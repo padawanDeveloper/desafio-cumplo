@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {RangePicker} from '../../components/pickers';
 import {fetchDollarHistory} from '../../state/actions';
-import LineChart from '../../components/charts/LineChart';
+import LineChart from '../../components/charts/customLine/LineChart';
 import {DollarStatics} from '../../components/cards';
 import {HomeLayout} from '../../layouts';
+import {LineChart2} from '../../components/charts/line2';
 
 const now = new Date();
 function HomeView(props) {
@@ -50,7 +51,8 @@ function HomeView(props) {
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: 5,
-            backgroundColor: 'white',
+            backgroundColor: 'rgba(75,192,192,0.9)',
+            color: '#eff2f4',
             flexDirection: 'wrap',
             marginTop: 10,
           }}
@@ -77,37 +79,43 @@ function HomeView(props) {
             </div>
           </div>
         </div>
+
         {props.state.data.history && props.state.data.history.length > 0 && (
-          <div
-            style={{
-              marginTop: 10,
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-            }}
-          >
-            <div style={{width: 500, marginBottom: 10}}>
-              <DollarStatics
-                data={[
-                  {field: 'Promedio', value: props.state.data.avg},
-                  {field: 'Precio mínimo', value: props.state.data.min},
-                  {field: 'Precio máximo', value: props.state.data.max},
-                ]}
-                title="Historial"
-                subTitle={`Valor observado ${startDate.getDate()}/${
-                  startDate.getMonth() + 1
-                }/${startDate.getFullYear()} al ${endDate.getDate()}/${
-                  endDate.getMonth() + 1
-                }/${endDate.getFullYear()}`}
+          <>
+            <div
+              style={{
+                marginTop: 10,
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div style={{width: 500, marginBottom: 10}}>
+                <DollarStatics
+                  data={[
+                    {field: 'Promedio', value: props.state.data.avg},
+                    {field: 'Precio mínimo', value: props.state.data.min},
+                    {field: 'Precio máximo', value: props.state.data.max},
+                  ]}
+                  title="Historial"
+                  subTitle={`Valor observado ${startDate.getDate()}/${
+                    startDate.getMonth() + 1
+                  }/${startDate.getFullYear()} al ${endDate.getDate()}/${
+                    endDate.getMonth() + 1
+                  }/${endDate.getFullYear()}`}
+                  loading={props.state.isFetching}
+                />
+              </div>
+
+              <LineChart
+                data={props.state.data.history}
                 loading={props.state.isFetching}
               />
             </div>
-
-            <LineChart
-              data={props.state.data.history}
-              loading={props.state.isFetching}
-            />
-          </div>
+            <div style={{backgroundColor: 'white'}}>
+              <LineChart2 data={props.state.data.history} />
+            </div>
+          </>
         )}
       </div>
     </HomeLayout>

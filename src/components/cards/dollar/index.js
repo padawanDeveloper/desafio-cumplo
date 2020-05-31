@@ -10,7 +10,7 @@ export default ({data, title, subTitle}) => (
         justifyContent: 'center',
         alignItems: 'center',
         height: 100,
-        backgroundColor: '#ff005a',
+        backgroundColor: 'rgba(75,192,192,0.9)',
       }}
     >
       <Header title={title} subTitle={subTitle} />
@@ -19,6 +19,7 @@ export default ({data, title, subTitle}) => (
       style={{
         justifyContent: 'center',
         display: 'flex',
+        backgroundColor: '#eff2f4',
       }}
     >
       <div style={{margin: 10, width: 500}}>
