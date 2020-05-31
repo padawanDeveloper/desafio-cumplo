@@ -9,15 +9,12 @@ class Line extends React.Component {
   componentDidMount() {
     const node = this.ref.current;
     const {data, lineGenerator, yScale, xScale} = this.props;
-    console.log(node);
     const initialData = data.map(d => {
-      console.log('initil', d);
       return {
-        Fecha: d.Fecha,
-        Valor: parseInt(d.Valor, 10),
+        date: d.date,
+        value: d.value,
       };
     });
-    console.log(node);
 
     d3.select(node)
       .append('path')

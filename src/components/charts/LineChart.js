@@ -30,20 +30,20 @@ class LineChart extends Component {
 
     const xScale = d3
       .scaleBand()
-      .domain(data.map(d => d.Fecha))
+      .domain(data.map(d => d.date))
       .rangeRound([0, width])
       .padding(0.1);
 
     const yScale = d3
       .scaleLinear()
-      .domain(d3.extent(data, d => parseInt(d.Valor, 10)))
+      .domain(d3.extent(data, d => parseInt(d.value, 10)))
       .range([height, 0])
       .nice();
 
     const lineGenerator = d3
       .line()
-      .x(d => xScale(d.Fecha))
-      .y(d => yScale(parseInt(d.Valor, 10)));
+      .x(d => xScale(d.date))
+      .y(d => yScale(parseInt(d.value, 10)));
 
     return (
       <div>
