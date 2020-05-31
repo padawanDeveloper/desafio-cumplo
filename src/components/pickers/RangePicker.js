@@ -1,32 +1,45 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import DatePicker from './DatePicker';
 
-const Test = ({setDates}) => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  useEffect(() => {
-    setDates({startDate, endDate});
-  }, [startDate, endDate, setDates]);
-
-  return (
-    <>
+const RangePicker = ({startDate, setStartDate, endDate, setEndDate, now}) => (
+  <>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        textAlign: 'center',
+      }}
+    >
+      <p>Inicio</p>
       <DatePicker
         selected={startDate}
         onChange={setStartDate}
         selectsStart
         startDate={startDate}
         endDate={endDate}
+        maxDate={new Date(endDate).setDate(new Date(endDate).getDate() - 1)}
       />
+    </div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <p>Fin</p>
       <DatePicker
         selected={endDate}
         onChange={setEndDate}
         selectsEnd
         startDate={startDate}
         endDate={endDate}
-        minDate={startDate}
+        minDate={new Date(startDate).setDate(new Date(startDate).getDate() + 1)}
+        maxDate={now}
       />
-    </>
-  );
-};
+    </div>
+  </>
+);
 
-export default Test;
+export default RangePicker;
