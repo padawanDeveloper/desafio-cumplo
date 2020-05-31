@@ -1,20 +1,40 @@
 import {
-  FETCH_DATA_SUCCESS,
   FETCH_DATA_DOLLAR,
   FETCH_DATA_ERROR,
+  FETCH_DATA_HISTORY_SUCCESS,
+  FETCH_DATA_CURRENT_SUCCESS,
 } from './actionTypes';
-import {fetchDollarHistory} from '../../api/fetchData';
+import {fetchDollar} from '../../api/fetchData';
 import {buildQuery, parseData} from '../lib/dollar';
 
-const saveData = data => ({type: FETCH_DATA_SUCCESS, data: parseData(data)});
+const saveDataHistory = data => ({
+  type: FETCH_DATA_HISTORY_SUCCESS,
+  data,
+});
+
 const errorFetchingData = error => ({type: FETCH_DATA_ERROR, error});
 
-export const fetchDollar = data => {
+export const fetchDollarHistory = data => {
   const query = buildQuery(data);
   return async dispatch => {
     await dispatch({type: FETCH_DATA_DOLLAR});
-    return fetchDollarHistory(query)
-      .then(({data}) => dispatch(saveData(data.Dolares)))
+    return fetchDollar(query)
+      .then(({data}) => parseData(data.Dolares))
+      .then(data => dispatch(saveDataHistory(data)))
+      .catch(error => dispatch(errorFetchingData(error)));
+  };
+};
+
+const saveDataCurrent = data => ({
+  type: FETCH_DATA_CURRENT_SUCCESS,
+  data,
+});
+
+export const fetchCurrenDollar = () => {
+  return async dispatch => {
+    await dispatch({type: FETCH_DATA_DOLLAR});
+    return fetchDollar('')
+      .then(({data}) => dispatch(saveDataCurrent(data.Dolares)))
       .catch(error => dispatch(errorFetchingData(error)));
   };
 };

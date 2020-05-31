@@ -1,11 +1,20 @@
-function dollarReducer(state = {isFetching: false, data: []}, action) {
+function dollarReducer(
+  state = {isFetching: false, data: [], current: {}},
+  action
+) {
   switch (action.type) {
     case 'FETCH_DATA_DOLLAR':
-      return {isFetching: true};
-    case 'FETCH_DATA_SUCCESS':
-      return {isFetching: false, data: action.data};
+      return {...state, isFetching: true};
+    case 'FETCH_DATA_HISTORY_SUCCESS':
+      return {
+        ...state,
+        isFetching: false,
+        data: action.data,
+      };
     case 'FETCH_DATA_ERROR':
-      return {isFetching: false, error: action.error};
+      return {...state, isFetching: false, error: action.error};
+    case 'FETCH_DATA_CURRENT_SUCCESS':
+      return {...state, isFetching: false, data: action.data};
     default:
       return state;
   }

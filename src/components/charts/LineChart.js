@@ -4,15 +4,8 @@ import Line from './Line';
 import * as d3 from 'd3';
 
 class LineChart extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      data: props.data,
-    };
-  }
-
   render() {
-    const {data} = this.state;
+    const {data} = this.props;
     const parentWidth = 800;
 
     const margins = {

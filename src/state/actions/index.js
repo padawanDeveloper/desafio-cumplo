@@ -1,3 +1,3 @@
-import {fetchDollar} from './dollarActions';
+import {fetchDollarHistory} from './dollarActions';
 
-export {fetchDollar};
+export {fetchDollarHistory};
