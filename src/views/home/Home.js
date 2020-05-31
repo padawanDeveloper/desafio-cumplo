@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {RangePicker} from '../../components/pickers';
-import {fetchDollar} from '../../state/actions';
+import {fetchDollarHistory} from '../../state/actions';
 import LineChart from '../../components/charts/LineChart';
 import {DollarStatics} from '../../components/cards';
 import {HomeLayout} from '../../layouts';
@@ -20,7 +20,7 @@ function HomeView(props) {
         startDate,
         endDate,
       };
-      props.fetchDollar(dates).then(() => setFetch(false));
+      props.fetchDollarHistory(dates).then(() => setFetch(false));
     };
     if (fetch) {
       fetchHistory();
@@ -77,7 +77,7 @@ function HomeView(props) {
             </div>
           </div>
         </div>
-        {props.state.data && props.state.data.length > 0 && (
+        {props.state.data.history && props.state.data.history.length > 0 && (
           <div
             style={{
               marginTop: 10,
@@ -89,18 +89,22 @@ function HomeView(props) {
             <div style={{width: 500, marginBottom: 10}}>
               <DollarStatics
                 data={[
-                  {field: 'Promedio', value: 750},
-                  {field: 'Precio mínimo', value: 70},
-                  {field: 'Precio máximo', value: 800},
+                  {field: 'Promedio', value: props.state.data.avg},
+                  {field: 'Precio mínimo', value: props.state.data.min},
+                  {field: 'Precio máximo', value: props.state.data.max},
                 ]}
-                title="Dolar hoy"
-                subTitle="Valor observado el día 30 de Mayo 2020"
+                title="Historial"
+                subTitle={`Valor observado ${startDate.getDate()}/${
+                  startDate.getMonth() + 1
+                }/${startDate.getFullYear()} al ${endDate.getDate()}/${
+                  endDate.getMonth() + 1
+                }/${endDate.getFullYear()}`}
                 loading={props.state.isFetching}
               />
             </div>
 
             <LineChart
-              data={props.state.data}
+              data={props.state.data.history}
               loading={props.state.isFetching}
             />
           </div>
@@ -115,7 +119,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchDollar: dates => dispatch(fetchDollar(dates)),
+  fetchDollarHistory: dates => dispatch(fetchDollarHistory(dates)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeView);
