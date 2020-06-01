@@ -18,13 +18,8 @@ function FetchDollar(props) {
     props.fetchDollarHistory(dates);
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    fetchHistory();
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="form-inline">
+    <div className="form-inline">
       <RangePicker
         startDate={startDate}
         endDate={endDate}
@@ -32,10 +27,10 @@ function FetchDollar(props) {
         setEndDate={setEndDate}
         now={now}
       />
-      <button className="btn btn-blue" type="submit">
+      <button className="btn btn-blue" onClick={() => fetchHistory()}>
         Buscar
       </button>
-    </form>
+    </div>
   );
 }
 
