@@ -24,35 +24,35 @@ class LineChart extends Component {
   }
   render() {
     const {data} = this.props;
-    const parentWidth = this.state.width;
-
+    const parentWidth = 900;
     const margins = {
       top: 20,
-      right: 20,
+      right: 40,
       bottom: 20,
       left: 40,
     };
 
     const width = parentWidth - margins.left - margins.right;
     const height = 500 - margins.top - margins.bottom;
-    console.log(width);
+
     const ticks = 5;
     const t = d3.transition().duration(1000);
 
     const xScale = d3
-      .scaleBand()
-      .domain(data.map(d => d.date))
-      .rangeRound([0, width])
-      .padding(0.1);
+      .scaleUtc()
+      .domain(d3.extent(data, d => d.date))
+      .range([0, width - margins.right])
+      .nice();
 
     const yScale = d3
       .scaleLinear()
       .domain(d3.extent(data, d => d.value))
-      .range([height, 0])
+      .range([height, margins.top])
       .nice();
 
     const lineGenerator = d3
       .line()
+      .defined(d => !isNaN(d.value))
       .x(d => xScale(d.date))
       .y(d => yScale(d.value));
 
@@ -60,11 +60,14 @@ class LineChart extends Component {
       <div>
         <svg
           className="lineChartSvg"
-          width={width + margins.left + margins.right}
+          width={width + margins.right}
           height={height + margins.top + margins.bottom}
         >
           <g transform={`translate(${margins.left}, ${margins.top})`}>
-            <XYAxis {...{xScale, yScale, width, height, ticks, t}} />
+            <XYAxis
+              {...{xScale, yScale, height, width, ticks, t}}
+              data={data}
+            />
             <Line
               data={data}
               xScale={xScale}

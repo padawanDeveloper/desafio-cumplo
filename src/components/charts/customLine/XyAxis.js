@@ -1,11 +1,13 @@
 import React from 'react';
 import Axis from './Axis';
 
-const XYAxis = ({xScale, yScale, height}) => {
+const XYAxis = ({xScale, yScale, height, width, data}) => {
   const xSettings = {
     scale: xScale,
     orient: 'bottom',
     transform: `translate(0, ${height})`,
+    width: width,
+    ticks: data.length,
   };
   const ySettings = {
     scale: yScale,
