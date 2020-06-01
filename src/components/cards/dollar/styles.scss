@@ -1,0 +1,40 @@
+@import '../../../styles/utils/variables';
+
+.card {
+  min-width: 500px;
+  flex-direction: column;
+  h2,
+  p {
+    font-size: 1em;
+    font-weight: 600;
+  }
+}
+
+.header {
+  display: flex;
+  height: 100px;
+  background-color: $turquoise;
+  h2,
+  p {
+    color: $white;
+    margin: 5px;
+    text-align: center;
+  }
+}
+
+.center {
+  margin: auto;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  background-color: $white;
+  padding: 20px;
+  table {
+    width: 100%;
+    td:last-child {
+      text-align: right;
+    }
+  }
+}

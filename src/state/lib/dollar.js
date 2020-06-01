@@ -11,21 +11,27 @@ const parseDollarHistory = data => {
   );
 };
 
+const floatFormat = val => parseFloat(val).toFixed(2);
+const calcAvg = resp =>
+  floatFormat(
+    resp.reduce((total, current) => {
+      return total + current.value;
+    }, 0) / resp.length
+  );
+const mathCalc = (values, cal) =>
+  floatFormat(
+    Math[cal].apply(
+      Math,
+      values.map(val => val.value)
+    )
+  );
+
 const parseData = data =>
   parseDollarHistory(data).then(resp => ({
     history: resp,
-    max: Math.max.apply(
-      Math,
-      resp.map(o => o.value)
-    ),
-    min: Math.min.apply(
-      Math,
-      resp.map(o => o.value)
-    ),
-    avg:
-      resp.reduce((total, current) => {
-        return total + current.value;
-      }, 0) / resp.length,
+    max: mathCalc(resp, 'max'),
+    min: mathCalc(resp, 'min'),
+    avg: calcAvg(resp),
   }));
 
 const parseDate = date => (date < 10 ? '0' : '');

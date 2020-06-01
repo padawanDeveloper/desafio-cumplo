@@ -1,13 +1,17 @@
 import React from 'react';
 
 export default ({data}) => (
-  <table style={{width: '100%'}}>
+  <table>
     <thead></thead>
     <tbody>
       {data.map(({field, value}) => (
         <tr key={field}>
-          <td style={{textAlign: 'left'}}>{field}</td>
-          <td style={{textAlign: 'right'}}>{value}</td>
+          <td>
+            <p>{field}</p>
+          </td>
+          <td>
+            <p>$ {value}</p>
+          </td>
         </tr>
       ))}
     </tbody>

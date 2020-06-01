@@ -31,6 +31,16 @@ function HomeView(props) {
     }
   }, [fetch]);
 
+  const data = [
+    {field: 'Promedio', value: props.state.data.avg},
+    {field: 'Valor mínimo', value: props.state.data.min},
+    {field: 'Valor máximo', value: props.state.data.max},
+  ];
+
+  const subTitle = `Valor observado ${new Date(
+    startDate
+  ).toLocaleDateString()} al ${new Date(endDate).toLocaleDateString()}`;
+
   return (
     <HomeLayout>
       <div className="container-app">
@@ -56,18 +66,9 @@ function HomeView(props) {
             <div className="container statics">
               <div>
                 <DollarStatics
-                  data={[
-                    {field: 'Promedio', value: props.state.data.avg},
-                    {field: 'Valor mínimo', value: props.state.data.min},
-                    {field: 'Valor máximo', value: props.state.data.max},
-                  ]}
+                  data={data}
                   title="Historial"
-                  subTitle={`Valor observado ${new Date(
-                    startDate
-                  ).toLocaleDateString()} al ${new Date(
-                    endDate
-                  ).toLocaleDateString()}`}
-                  loading={props.state.isFetching}
+                  subTitle={subTitle}
                 />
                 <div style={{backgroundColor: 'white', maxWidth: 600}}>
                   <LineChart2 data={props.state.data.history} />
