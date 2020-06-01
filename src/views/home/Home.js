@@ -9,20 +9,20 @@ import {
   FetchDollarForm,
 } from 'components';
 
+const buildSubTitle = props =>
+  `Valor observado ${props.state.data.history
+    .shift()
+    .date.toLocaleDateString()} al ${props.state.data.history
+    .pop()
+    .date.toLocaleDateString()}`;
+
+const buildData = props => [
+  {field: 'Promedio', value: props.state.data.avg},
+  {field: 'Valor mínimo', value: props.state.data.min},
+  {field: 'Valor máximo', value: props.state.data.max},
+];
+
 function HomeView(props) {
-  const data = [
-    {field: 'Promedio', value: props.state.data.avg},
-    {field: 'Valor mínimo', value: props.state.data.min},
-    {field: 'Valor máximo', value: props.state.data.max},
-  ];
-
-  const getSubTitle = () =>
-    `Valor observado ${props.state.data.history
-      .shift()
-      .date.toLocaleDateString()} al ${props.state.data.history
-      .pop()
-      .date.toLocaleDateString()}`;
-
   return (
     <HomeLayout>
       <div className="container-app">
@@ -37,9 +37,9 @@ function HomeView(props) {
             <div className="container statics">
               <div>
                 <DollarStatics
-                  data={data}
+                  data={buildData(props)}
                   title="Historial"
-                  subTitle={getSubTitle()}
+                  subTitle={buildSubTitle(props)}
                 />
                 <div style={{backgroundColor: 'white', maxWidth: 600}}>
                   <LineChart2 data={props.state.data.history} />
