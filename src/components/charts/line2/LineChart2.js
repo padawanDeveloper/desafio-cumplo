@@ -28,8 +28,4 @@ const dataBuild = data => ({
   ],
 });
 
-export default props => (
-  <div>
-    <Line data={dataBuild(props.data)} />
-  </div>
-);
+export default props => <Line data={dataBuild(props.data)} />;

@@ -6,6 +6,7 @@ import LineChart from '../../components/charts/customLine/LineChart';
 import {DollarStatics} from '../../components/cards';
 import {HomeLayout} from '../../layouts';
 import {LineChart2} from '../../components/charts/line2';
+import {Modal} from '../../components/utils';
 
 const now = new Date();
 function HomeView(props) {
@@ -27,46 +28,13 @@ function HomeView(props) {
       fetchHistory();
     }
   }, [fetch]);
-
+  console.log(props.state.isFetching);
   return (
     <HomeLayout>
-      <div
-        style={{
-          marginTop: 60,
-        }}
-      >
-        <DollarStatics
-          data={[
-            {field: 'Valor Promedio', value: 750},
-            {field: 'Valor Mínimo', value: 70},
-            {field: 'Valor Máximo', value: 800},
-          ]}
-          title="Dolar hoy"
-          subTitle="Valor observado el día 30 de Mayo 2020"
-          loading={props.state.isFetching}
-        />
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 5,
-            backgroundColor: 'rgba(75,192,192,0.9)',
-            color: '#eff2f4',
-            flexDirection: 'wrap',
-            marginTop: 10,
-          }}
-        >
-          <div
-            style={{
-              margin: 10,
-              display: 'flex',
-              width: 500,
-              justifyContent: 'space-around',
-              alignItems: 'flex-end',
-            }}
-          >
-            <p style={{margin: 0}}>Buscar historial:</p>
+      <div className="container-app">
+        <div className="search-bar container">
+          <p>Buscar historial</p>
+          <div className="form-inline">
             <RangePicker
               startDate={startDate}
               endDate={endDate}
@@ -74,28 +42,22 @@ function HomeView(props) {
               setEndDate={setEndDate}
               now={now}
             />
-            <div>
-              <button onClick={() => setFetch(true)}>Buscar</button>
-            </div>
+            <button className="btn btn-blue" onClick={() => setFetch(true)}>
+              Buscar
+            </button>
           </div>
+          {props.state.error && <p>{props.state.error.message}</p>}
         </div>
 
         {props.state.data.history && props.state.data.history.length > 0 && (
           <>
-            <div
-              style={{
-                marginTop: 10,
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div style={{width: 500, marginBottom: 10}}>
+            <div className="container statics">
+              <div>
                 <DollarStatics
                   data={[
                     {field: 'Promedio', value: props.state.data.avg},
-                    {field: 'Precio mínimo', value: props.state.data.min},
-                    {field: 'Precio máximo', value: props.state.data.max},
+                    {field: 'Valor mínimo', value: props.state.data.min},
+                    {field: 'Valor máximo', value: props.state.data.max},
                   ]}
                   title="Historial"
                   subTitle={`Valor observado ${startDate.getDate()}/${
@@ -105,19 +67,25 @@ function HomeView(props) {
                   }/${endDate.getFullYear()}`}
                   loading={props.state.isFetching}
                 />
+                <div style={{backgroundColor: 'white', maxWidth: 600}}>
+                  <LineChart2 data={props.state.data.history} />
+                </div>
               </div>
-
               <LineChart
                 data={props.state.data.history}
                 loading={props.state.isFetching}
               />
             </div>
-            <div style={{backgroundColor: 'white'}}>
-              <LineChart2 data={props.state.data.history} />
-            </div>
           </>
         )}
       </div>
+      {props.state.isFetching ? (
+        <Modal>
+          <div>
+            <p>Buscando...</p>
+          </div>
+        </Modal>
+      ) : null}
     </HomeLayout>
   );
 }
