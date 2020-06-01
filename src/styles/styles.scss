@@ -67,14 +67,14 @@ body {
   margin: 5px 10px 5px 0;
   padding: 10px 20px;
   background-color: $white;
-  border: 1px solid #ddd;
+  border: 1px solid $light-grey;
   font-size: 1em;
 }
 
 .nav-bar {
   height: 50px;
   width: 100%;
-  background-color: #3a454f;
+  background-color: $grey;
   position: fixed;
   z-index: 9;
 }
@@ -89,8 +89,8 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #3a454f;
-  color: white;
+  background-color: $grey;
+  color: $white;
   height: 60px;
   display: flex;
   align-items: center;
@@ -162,7 +162,7 @@ path {
 }
 
 #modal > div {
-  background-color: white;
+  background-color: $white;
   max-width: 500px;
   padding: 15px;
   border-radius: 5px;
