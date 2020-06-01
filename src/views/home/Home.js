@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {fetchDollarHistory} from '../../state/actions';
-import {HomeLayout} from '../../layouts';
+import {fetchDollarHistory} from 'state/actions';
+import {HomeLayout} from 'layouts';
 import {
   Modal,
   RangePicker,

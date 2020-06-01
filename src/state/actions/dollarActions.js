@@ -4,7 +4,7 @@ import {
   FETCH_DATA_HISTORY_SUCCESS,
   FETCH_DATA_CURRENT_SUCCESS,
 } from './actionTypes';
-import {fetchDollar} from '../../api/fetchData';
+import {fetchDollar} from 'api/fetchData';
 import {buildQuery, parseData} from '../lib/dollar';
 
 const saveDataHistory = data => ({
