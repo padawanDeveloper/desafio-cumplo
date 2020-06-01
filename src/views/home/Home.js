@@ -9,17 +9,17 @@ import {
   FetchDollarForm,
 } from 'components';
 
-const buildSubTitle = props =>
-  `Valor observado ${props.state.data.history
-    .shift()
-    .date.toLocaleDateString()} al ${props.state.data.history
-    .pop()
-    .date.toLocaleDateString()}`;
+const buildSubTitle = date => {
+  const newArray = date;
+  return `Valor observado ${newArray[
+    newArray.length - 1
+  ].date.toLocaleDateString()} al ${newArray[0].date.toLocaleDateString()}`;
+};
 
-const buildData = props => [
-  {field: 'Promedio', value: props.state.data.avg},
-  {field: 'Valor mínimo', value: props.state.data.min},
-  {field: 'Valor máximo', value: props.state.data.max},
+const buildData = data => [
+  {field: 'Promedio', value: data.avg},
+  {field: 'Valor mínimo', value: data.min},
+  {field: 'Valor máximo', value: data.max},
 ];
 
 function HomeView(props) {
@@ -32,26 +32,24 @@ function HomeView(props) {
           {props.state.error && <p>{props.state.error.message}</p>}
         </div>
 
-        {props.state.data.history && props.state.data.history.length > 0 && (
-          <>
-            <div className="container statics">
-              <div>
-                <DollarStatics
-                  data={buildData(props)}
-                  title="Historial"
-                  subTitle={buildSubTitle(props)}
-                />
-                <div style={{backgroundColor: 'white', maxWidth: 600}}>
-                  <LineChart2 data={props.state.data.history} />
-                </div>
-              </div>
-              <LineChart
-                data={props.state.data.history}
-                loading={props.state.isFetching}
+        {props.state.data.history && props.state.data.history.length > 0 ? (
+          <div className="container statics">
+            <div>
+              <DollarStatics
+                data={buildData(props.state.data)}
+                title="Historial"
+                subTitle={buildSubTitle(props.state.data.history)}
               />
+              <div style={{backgroundColor: 'white', maxWidth: 600}}>
+                <LineChart2 data={props.state.data.history} />
+              </div>
             </div>
-          </>
-        )}
+            <LineChart
+              data={props.state.data.history}
+              loading={props.state.isFetching}
+            />
+          </div>
+        ) : null}
       </div>
       {props.state.isFetching ? (
         <Modal>
@@ -64,8 +62,8 @@ function HomeView(props) {
   );
 }
 
-const mapStateToProps = state => ({
-  state: state.dollar,
+const mapStateToProps = ({dollar}) => ({
+  state: dollar,
 });
 
-export default connect(mapStateToProps, null)(HomeView);
+export default connect(mapStateToProps, {})(HomeView);
