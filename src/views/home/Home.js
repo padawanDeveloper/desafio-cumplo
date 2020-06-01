@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {RangePicker} from '../../components/pickers';
 import {fetchDollarHistory} from '../../state/actions';
-import LineChart from '../../components/charts/customLine/LineChart';
-import {DollarStatics} from '../../components/cards';
 import {HomeLayout} from '../../layouts';
-import {LineChart2} from '../../components/charts/line2';
-import {Modal} from '../../components/utils';
+import {
+  Modal,
+  RangePicker,
+  LineChart,
+  LineChart2,
+  DollarStatics,
+} from 'components';
 
 const now = new Date();
 function HomeView(props) {
@@ -28,7 +30,7 @@ function HomeView(props) {
       fetchHistory();
     }
   }, [fetch]);
-  console.log(props.state.isFetching);
+
   return (
     <HomeLayout>
       <div className="container-app">

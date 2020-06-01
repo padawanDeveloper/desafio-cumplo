@@ -1,3 +1,3 @@
-import React from 'react';
+import NavBar from './NavBar';
 
-export default () => <div className="nav-bar"></div>;
+export {NavBar};

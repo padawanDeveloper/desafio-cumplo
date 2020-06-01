@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../components/navigation';
+import {NavBar} from 'components';
 
 export default props => (
   <>
