@@ -1,0 +1,170 @@
+@import './vendor/picker.scss';
+@import './utils/mixings';
+@import './utils/variables';
+@import './partials/reset';
+@import './components/buttons.scss';
+
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $backgroundBodyColor;
+}
+
+.container {
+  margin: 10px;
+}
+
+.container-app {
+  margin-top: 60px;
+}
+
+.search-bar {
+  border-radius: 5px;
+  background-color: rgba(75, 192, 192, 0.9);
+  color: #eff2f4;
+  padding: 10px;
+  p {
+    text-align: center;
+    margin: 10px;
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+}
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+
+  text-align: center;
+  margin: 10px;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px 20px;
+  background-color: $white;
+  border: 1px solid #ddd;
+  font-size: 1em;
+}
+
+.nav-bar {
+  height: 50px;
+  width: 100%;
+  background-color: #3a454f;
+  position: fixed;
+  z-index: 9;
+}
+
+.content-view {
+  overflow-y: scroll;
+  height: 100%;
+  margin-bottom: 70px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #3a454f;
+  color: white;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.line-chart-2 {
+  background-color: $white;
+}
+
+svg {
+  fill: $black;
+  fill-opacity: 0.3;
+}
+
+path {
+  stroke: $steelblue;
+}
+
+.lineChartSvg {
+  background-color: $white;
+  padding: 10px;
+}
+
+.axis {
+  stroke: $black;
+}
+
+.line-group {
+  overflow-x: scroll;
+}
+
+.axis-labels text {
+  fill: $black;
+  fill-opacity: 0.9;
+  font-size: 12px;
+  text-anchor: middle;
+}
+
+.axis-labels line {
+  stroke: $black;
+}
+
+.gridline {
+  opacity: 0.2;
+}
+
+#modal {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal:empty {
+  display: none;
+}
+
+#modal > div {
+  background-color: white;
+  max-width: 500px;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
