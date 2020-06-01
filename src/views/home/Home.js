@@ -62,11 +62,11 @@ function HomeView(props) {
                     {field: 'Valor máximo', value: props.state.data.max},
                   ]}
                   title="Historial"
-                  subTitle={`Valor observado ${startDate.getDate()}/${
-                    startDate.getMonth() + 1
-                  }/${startDate.getFullYear()} al ${endDate.getDate()}/${
-                    endDate.getMonth() + 1
-                  }/${endDate.getFullYear()}`}
+                  subTitle={`Valor observado ${new Date(
+                    startDate
+                  ).toLocaleDateString()} al ${new Date(
+                    endDate
+                  ).toLocaleDateString()}`}
                   loading={props.state.isFetching}
                 />
                 <div style={{backgroundColor: 'white', maxWidth: 600}}>
