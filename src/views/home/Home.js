@@ -10,8 +10,8 @@ import {
   DollarStatics,
 } from 'components';
 
-const now = new Date();
 function HomeView(props) {
+  const now = new Date();
   const [startDate, setStartDate] = useState(
     new Date(now).setDate(now.getDate() - 1)
   );
