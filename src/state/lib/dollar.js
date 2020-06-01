@@ -1,7 +1,7 @@
 const values = {value: 'Valor', date: 'Fecha'};
 const getData = (data, key) => data[`${values[key]}`];
-const parseDollarHistory = data => {
-  return new Promise(resolve =>
+const parseDollarHistory = data =>
+  new Promise(resolve =>
     resolve(
       data.map(dollarData => ({
         value: parseFloat(getData(dollarData, 'value').replace(',', '.')),
@@ -9,7 +9,6 @@ const parseDollarHistory = data => {
       }))
     )
   );
-};
 
 const floatFormat = val => parseFloat(val).toFixed(2);
 const calcAvg = resp =>
@@ -18,6 +17,7 @@ const calcAvg = resp =>
       return total + current.value;
     }, 0) / resp.length
   );
+
 const mathCalc = (values, cal) =>
   floatFormat(
     Math[cal].apply(
@@ -26,13 +26,14 @@ const mathCalc = (values, cal) =>
     )
   );
 
-const parseData = data =>
-  parseDollarHistory(data).then(resp => ({
-    history: resp,
-    max: mathCalc(resp, 'max'),
-    min: mathCalc(resp, 'min'),
-    avg: calcAvg(resp),
-  }));
+const parseData = async data => {
+  const result = await parseDollarHistory(data);
+  const history = result;
+  const max = mathCalc(result, 'max');
+  const min = mathCalc(result, 'min');
+  const avg = calcAvg(result);
+  return {avg, history, max, min};
+};
 
 const parseDate = date => (date < 10 ? '0' : '');
 function getValues(date) {

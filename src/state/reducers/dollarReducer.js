@@ -1,5 +1,10 @@
 function dollarReducer(
-  state = {isFetching: false, data: [], current: {}, error: null},
+  state = {
+    isFetching: false,
+    data: {avg: null, history: [], max: null, min: null},
+    current: {},
+    error: null,
+  },
   action
 ) {
   switch (action.type) {
@@ -17,7 +22,7 @@ function dollarReducer(
     case 'FETCH_DATA_CURRENT_SUCCESS':
       return {...state, isFetching: false, data: action.data, error: null};
     default:
-      return state;
+      return {...state};
   }
 }
 
