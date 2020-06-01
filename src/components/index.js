@@ -3,6 +3,7 @@ import {RangePicker} from './pickers';
 import {NavBar} from './navigation';
 import {LineChart, LineChart2} from './charts';
 import {DollarStatics} from './cards';
+import {FetchDollarForm} from './forms';
 
 export {
   Modal,
@@ -12,4 +13,5 @@ export {
   LineChart,
   LineChart2,
   DollarStatics,
+  FetchDollarForm,
 };
